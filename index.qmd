@@ -2,7 +2,7 @@
 title: "Bryan Armpriest" 
 about:
   template: trestles  # jolla  trestles  solana  marquee  broadside
-  image: img/image.jpg
+  image: img/image.png
   image-width: 16em
   image-shape: rounded # rectangle  round  rounded
   
