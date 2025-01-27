@@ -3,16 +3,18 @@ project:
   output-dir: "." 
 
 website:
-  title: "YOUR NAME"
+  title: "Bryan Armpriest"
   navbar:
     # background: "#1c4982"
     pinned: true
     left:
       - text: Blog
         href: blog-listing.qmd
+      - text: Project
+        href: danl_proj_nba.ipynb
             
   page-footer: 
-    center: "Powered with GitHub, Quarto, and Jupyter Notebook<br>© YOUR NAME, 2025"
+    center: "Powered with GitHub, Quarto, and Jupyter Notebook<br>© Bryan Armpriest, 2025"
 
 format:
   html:
