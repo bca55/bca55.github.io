@@ -12,6 +12,10 @@ website:
         href: blog-listing.qmd
       - text: Project
         href: danl_proj_nba.ipynb
+      - text: "Python Data Analysis"
+        menu:   
+          - pandas_basic.ipynb
+          - seaborn_basic.ipynb
             
   page-footer: 
     center: "Powered with GitHub, Quarto, and Jupyter Notebook<br>© Bryan Armpriest, 2025"
