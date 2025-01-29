@@ -28,8 +28,8 @@
     "text": "Human vs. Droid\n\nggplot(data = \n         starwars %&gt;% \n         filter(species %in% c(\"Human\", \"Droid\"))) +\n  geom_boxplot(aes(x = species, y = mass, \n                   fill = species),\n               show.legend = FALSE)"
   },
   {
-    "objectID": "posts/HelloWorld.html",
-    "href": "posts/HelloWorld.html",
+    "objectID": "posts/hello-world/HelloWorld.html",
+    "href": "posts/hello-world/HelloWorld.html",
     "title": "Bryan Armpriest",
     "section": "",
     "text": "sentient = \"Hello World\"\nif sentient == \"Hello World\":\n  \"Hello World\"\n\nsentient\n\n'Hello World'"
