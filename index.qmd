@@ -2,7 +2,7 @@
 title: "Bryan Armpriest" 
 about:
   template: trestles  # jolla  trestles  solana  marquee  broadside
-  image: img/image.png
+  image: img/pfp.png
   image-width: 16em
   image-shape: rounded # rectangle  round  rounded
   
@@ -27,7 +27,7 @@ about:
 ---
 
 
-Bryan Armpriest is a Senior Biology major at SUNY Geneseo. My primary interests are bioinformatics and analysis of bioacoustic information. When I am not collecting and analyzing data for research or learning, fitness is a passion of mine. 
+I am a Senior Biology major at SUNY Geneseo. My primary interests are bioinformatics and analysis of bioacoustic information. When I am not collecting and analyzing data for research or learning, fitness is a passion of mine. 
 
 ## Education
 
