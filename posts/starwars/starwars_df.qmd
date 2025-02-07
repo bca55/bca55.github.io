@@ -1,6 +1,6 @@
 ---
 title: Starwars
-author: Your Name
+author: Bryan Armpriest
 date: 2025-01-22
 categories: [starwars, code, analysis]
 image: image.png
