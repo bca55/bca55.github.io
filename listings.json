@@ -2,8 +2,7 @@
   {
     "listing": "/blog-listing.html",
     "items": [
-      "/posts/hello-world/HelloWorld.html",
-      "/posts/python_basics/python_basics_blog.html",
+      "/posts/python_basics/danl_210_python_basic.html",
       "/posts/welcome/index.html",
       "/posts/starwars/starwars_df.html",
       "/posts/post-with-code/index.html"
