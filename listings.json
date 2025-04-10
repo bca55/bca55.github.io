@@ -2,6 +2,7 @@
   {
     "listing": "/blog-listing.html",
     "items": [
+      "/posts/holiday_movies/Pandas_Basics_Blog.html",
       "/posts/spotify/Spotify_with_Pandas.html",
       "/posts/python_basics/danl_210_python_basic.html",
       "/posts/welcome/index.html",
