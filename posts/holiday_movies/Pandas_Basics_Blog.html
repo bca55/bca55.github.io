@@ -201,7 +201,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#as-always-thank-you-for-reading" id="toc-as-always-thank-you-for-reading" class="nav-link active" data-scroll-target="#as-always-thank-you-for-reading">As always, thank you for reading!</a></li>
+  <li><a href="#approach-2-data-visualization" id="toc-approach-2-data-visualization" class="nav-link active" data-scroll-target="#approach-2-data-visualization">Approach 2: Data Visualization</a>
+  <ul class="collapse">
+  <li><a href="#as-always-thank-you-for-reading" id="toc-as-always-thank-you-for-reading" class="nav-link" data-scroll-target="#as-always-thank-you-for-reading">As always, thank you for reading!</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -212,18 +215,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="cell-1" class="cell" data-execution_count="23">
+<div id="cell-1" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Let's load up some data from IMDB so that we can take a look at it!</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#We are given two dataframes, one with the bulk of the data:</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>holiday_movies <span class="op">=</span> pd.read_csv(<span class="st">"https://bcdanl.github.io/data/holiday_movies.csv"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#And another with genres!</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>holiday_movie_genres <span class="op">=</span> pd.read_csv(<span class="st">"https://bcdanl.github.io/data/holiday_movie_genres.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#We are given two dataframes, one with the bulk of the data:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>holiday_movies <span class="op">=</span> pd.read_csv(<span class="st">"https://bcdanl.github.io/data/holiday_movies.csv"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#And another with genres!</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>holiday_movie_genres <span class="op">=</span> pd.read_csv(<span class="st">"https://bcdanl.github.io/data/holiday_movie_genres.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-2" class="cell" data-outputid="49b2c7e6-73a6-4c37-9bb4-79108b86e495" data-execution_count="10">
+<div id="cell-2" class="cell" data-outputid="49b2c7e6-73a6-4c37-9bb4-79108b86e495">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>holiday_movies.info()</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#holiday_movies</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -648,7 +652,7 @@ memory usage: 141.7+ KB</code></pre>
   </div>
 </div>
 </div>
-<div id="cell-3" class="cell" data-outputid="934e64da-fd95-464b-e0c4-9ae617172ae5" data-execution_count="11">
+<div id="cell-3" class="cell" data-outputid="934e64da-fd95-464b-e0c4-9ae617172ae5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>holiday_movie_genres.info() <span class="co">#From looking at this data, there is a common variable with tconst</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#holiday_movie_genres</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -996,13 +1000,13 @@ memory usage: 70.9+ KB</code></pre>
 </div>
 </div>
 <p>With this in mind, I am going to join these two tables using merge() with the proper ‘how’ function! (joining!)</p>
-<div id="cell-5" class="cell" data-execution_count="57">
+<div id="cell-5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hm_merged <span class="op">=</span> pd.merge(holiday_movies, holiday_movie_genres, on<span class="op">=</span><span class="st">'tconst'</span>, how<span class="op">=</span><span class="st">'left'</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>hm_merged <span class="op">=</span> hm_merged.drop_duplicates([<span class="st">'simple_title'</span>], keep <span class="op">=</span> <span class="st">'first'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now that these two tables are joined, we can ask a few questions about the dataframe!</p>
 <p>Let’s start with finding the proportions of the genres that we have just imported. (counting and indexing!)</p>
-<div id="cell-7" class="cell" data-outputid="7069f923-07ed-48be-8ad0-242cdf570319" data-execution_count="58">
+<div id="cell-7" class="cell" data-outputid="7069f923-07ed-48be-8ad0-242cdf570319">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>genre_count <span class="op">=</span> pd.DataFrame(hm_merged[<span class="st">'genres'</span>].value_counts().reset_index())</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>genre_count <span class="co">#the top 3 genres of holiday movies in terms of frequency are comedy, drama and romance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="58">
@@ -1398,7 +1402,7 @@ memory usage: 70.9+ KB</code></pre>
 </div>
 </div>
 <p>Let’s also say that I was interested in a specific movie, and didn’t feel like using a filtering method to find it!</p>
-<div id="cell-9" class="cell" data-outputid="78001b4e-39cf-4e50-d894-bdcadbacbf30" data-execution_count="59">
+<div id="cell-9" class="cell" data-outputid="78001b4e-39cf-4e50-d894-bdcadbacbf30">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>name_to_index <span class="op">=</span> hm_merged.set_index(keys <span class="op">=</span> [<span class="st">'simple_title'</span>])</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>name_to_index.loc[<span class="st">'christmas wedding baby'</span>] <span class="co">#interesting! This is how I knew that I need to drop duplicates for accurate results!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1453,37 +1457,37 @@ memory usage: 70.9+ KB</code></pre>
 </div>
 </div>
 <p>Now, one could be curious as to how the top 3 categories relate to one another in terms of ratings. I will use filtering methods and calculate the mean ratings of each.</p>
-<div id="cell-11" class="cell" data-execution_count="60">
+<div id="cell-11" class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>comedy <span class="op">=</span> hm_merged.query(<span class="st">"genres == 'Comedy'"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>drama <span class="op">=</span> hm_merged.query(<span class="st">"genres == 'Drama'"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>romance <span class="op">=</span> hm_merged.query(<span class="st">"genres == 'Romance'"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-12" class="cell" data-outputid="21658d82-7123-469e-eded-fce801ddcd5d" data-execution_count="61">
+<div id="cell-12" class="cell" data-outputid="21658d82-7123-469e-eded-fce801ddcd5d">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(hm_merged[<span class="st">'average_rating'</span>].mean()) <span class="co">#returns 6.056</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="61">
 <pre><code>6.075108538350217</code></pre>
 </div>
 </div>
-<div id="cell-13" class="cell" data-outputid="da51e73a-1496-4d05-bf3c-7fc4048137dc" data-execution_count="62">
+<div id="cell-13" class="cell" data-outputid="da51e73a-1496-4d05-bf3c-7fc4048137dc">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(comedy[<span class="st">'average_rating'</span>].mean()) <span class="co">#returns 5.914</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="62">
 <pre><code>5.878355501813784</code></pre>
 </div>
 </div>
-<div id="cell-14" class="cell" data-outputid="3e80365d-8018-48f7-d239-69798617e36c" data-execution_count="63">
+<div id="cell-14" class="cell" data-outputid="3e80365d-8018-48f7-d239-69798617e36c">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(drama[<span class="st">'average_rating'</span>].mean()) <span class="co">#returns 6.068</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="63">
 <pre><code>6.174680306905372</code></pre>
 </div>
 </div>
-<div id="cell-15" class="cell" data-outputid="98ba23d4-9a3c-43c5-8bf7-4a9ca032bbcb" data-execution_count="64">
+<div id="cell-15" class="cell" data-outputid="98ba23d4-9a3c-43c5-8bf7-4a9ca032bbcb">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">float</span>(romance[<span class="st">'average_rating'</span>].mean()) <span class="co">#returns 6.035</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="64">
 <pre><code>6.020634920634919</code></pre>
 </div>
 </div>
 <p>The average rating for all holiday movies in the list happens to be around 6.1. Comedies tended to rate lower than this, but not by much. This seems to be quite a complex dynamic, and next, I would like to explore the highest rated comedy films and the lowest ones.</p>
-<div id="cell-17" class="cell" data-outputid="b8602f91-5ff2-4756-e696-9c22bde7bb1e" data-execution_count="65">
+<div id="cell-17" class="cell" data-outputid="b8602f91-5ff2-4756-e696-9c22bde7bb1e">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>descending_comedy <span class="op">=</span> comedy.sort_values([<span class="st">'average_rating'</span>], ascending <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>descending_comedy[[<span class="st">'simple_title'</span>, <span class="st">'average_rating'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="65">
@@ -1767,7 +1771,7 @@ memory usage: 70.9+ KB</code></pre>
   </div>
 </div>
 </div>
-<div id="cell-18" class="cell" data-outputid="fd9df766-7098-4f8e-c612-d5244b73a057" data-execution_count="66">
+<div id="cell-18" class="cell" data-outputid="fd9df766-7098-4f8e-c612-d5244b73a057">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ascending_comedy <span class="op">=</span> comedy.sort_values([<span class="st">'average_rating'</span>], ascending <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ascending_comedy[[<span class="st">'simple_title'</span>, <span class="st">'average_rating'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="66">
@@ -2052,10 +2056,902 @@ memory usage: 70.9+ KB</code></pre>
 </div>
 </div>
 <p>Not surprisingly, there is quite a range of ratings for holiday movies that could also be considered comedies. They seem to range from an abysmal 1.3 to a fabulous 9.8. With all things considered, I’m surprised that I’ve never even heard of most of these highly acclaimed films/shows.</p>
+<section id="approach-2-data-visualization" class="level1">
+<h1>Approach 2: Data Visualization</h1>
+<ol type="1">
+<li><p>Use pandas to select the five genres with the highest film counts.</p></li>
+<li><p>Use numpy to add a new variable, log of num_votes.</p></li>
+<li><p>Use seaborn to plot the relationship between log of num_votes and average_rating, grouping by genre and coloring or faceting by title_type.</p></li>
+</ol>
+<div id="cell-21" class="cell" data-outputid="fc0355b1-78b7-4a44-f16c-24e34db46b10" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>genre_count <span class="op">=</span> hm_merged.groupby(<span class="st">'genres'</span>).agg(film_count <span class="op">=</span> (<span class="st">'primary_title'</span>, <span class="st">'count'</span>)).reset_index()</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>top_5 <span class="op">=</span> genre_count.nlargest(<span class="dv">5</span>, <span class="st">'film_count'</span>, keep <span class="op">=</span> <span class="st">'all'</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>top_5_genre <span class="op">=</span> top_5[<span class="st">'genres'</span>].to_list()</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>top_5_genre <span class="co">#Comedy, Drama, Animation, Family, Romance</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>movies_top_5_genre <span class="op">=</span> hm_merged[hm_merged[<span class="st">'genres'</span>].isin(top_5_genre)]</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>movies_top_5_genre <span class="co">#Here is the selected dataframe with the highest film counts!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+
+  <div id="df-63e34e41-541b-4350-be66-3ae54611a517" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">tconst</th>
+<th data-quarto-table-cell-role="th">title_type</th>
+<th data-quarto-table-cell-role="th">primary_title</th>
+<th data-quarto-table-cell-role="th">simple_title</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">runtime_minutes</th>
+<th data-quarto-table-cell-role="th">average_rating</th>
+<th data-quarto-table-cell-role="th">num_votes</th>
+<th data-quarto-table-cell-role="th">genres</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>tt0020356</td>
+<td>movie</td>
+<td>Sailor's Holiday</td>
+<td>sailors holiday</td>
+<td>1929</td>
+<td>58.0</td>
+<td>5.4</td>
+<td>55</td>
+<td>Comedy</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>tt0020823</td>
+<td>movie</td>
+<td>The Devil's Holiday</td>
+<td>the devils holiday</td>
+<td>1930</td>
+<td>80.0</td>
+<td>6.0</td>
+<td>242</td>
+<td>Drama</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>tt0020985</td>
+<td>movie</td>
+<td>Holiday</td>
+<td>holiday</td>
+<td>1930</td>
+<td>91.0</td>
+<td>6.3</td>
+<td>638</td>
+<td>Comedy</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>tt0021268</td>
+<td>movie</td>
+<td>Holiday of St. Jorgen</td>
+<td>holiday of st jorgen</td>
+<td>1930</td>
+<td>83.0</td>
+<td>7.4</td>
+<td>256</td>
+<td>Comedy</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>tt0021377</td>
+<td>movie</td>
+<td>Sin Takes a Holiday</td>
+<td>sin takes a holiday</td>
+<td>1930</td>
+<td>81.0</td>
+<td>6.1</td>
+<td>740</td>
+<td>Comedy</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4520</td>
+<td>tt9747440</td>
+<td>tvMovie</td>
+<td>A Christmas Love Story</td>
+<td>a christmas love story</td>
+<td>2019</td>
+<td>84.0</td>
+<td>6.9</td>
+<td>1652</td>
+<td>Drama</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4523</td>
+<td>tt9747450</td>
+<td>tvMovie</td>
+<td>Holiday for Heroes</td>
+<td>holiday for heroes</td>
+<td>2019</td>
+<td>81.0</td>
+<td>7.0</td>
+<td>1655</td>
+<td>Romance</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4524</td>
+<td>tt9802890</td>
+<td>tvMovie</td>
+<td>Christmas Jars</td>
+<td>christmas jars</td>
+<td>2019</td>
+<td>93.0</td>
+<td>7.3</td>
+<td>914</td>
+<td>Drama</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4525</td>
+<td>tt9815084</td>
+<td>tvMovie</td>
+<td>A Very British Christmas</td>
+<td>a very british christmas</td>
+<td>2019</td>
+<td>90.0</td>
+<td>5.7</td>
+<td>725</td>
+<td>Comedy</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4528</td>
+<td>tt9892854</td>
+<td>tvMovie</td>
+<td>#Xmas</td>
+<td>xmas</td>
+<td>2022</td>
+<td>84.0</td>
+<td>5.8</td>
+<td>926</td>
+<td>Comedy</td>
+</tr>
+</tbody>
+</table>
+
+<p>1692 rows × 9 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-63e34e41-541b-4350-be66-3ae54611a517')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-63e34e41-541b-4350-be66-3ae54611a517 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-63e34e41-541b-4350-be66-3ae54611a517');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    <div id="df-b6733471-d08a-4eb4-9a09-686e4b157b08">
+      <button class="colab-df-quickchart" onclick="quickchart('df-b6733471-d08a-4eb4-9a09-686e4b157b08')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+      </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+      <script>
+        async function quickchart(key) {
+          const quickchartButtonEl =
+            document.querySelector('#' + key + ' button');
+          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+          quickchartButtonEl.classList.add('colab-df-spinner');
+          try {
+            const charts = await google.colab.kernel.invokeFunction(
+                'suggestCharts', [key], {});
+          } catch (error) {
+            console.error('Error during call to suggestCharts:', error);
+          }
+          quickchartButtonEl.classList.remove('colab-df-spinner');
+          quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+        }
+        (() => {
+          let quickchartButtonEl =
+            document.querySelector('#df-b6733471-d08a-4eb4-9a09-686e4b157b08 button');
+          quickchartButtonEl.style.display =
+            google.colab.kernel.accessAllowed ? 'block' : 'none';
+        })();
+      </script>
+    </div>
+
+  <div id="id_9b7e87cb-2836-4754-a76f-cb98cb7424a3">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('movies_top_5_genre')" title="Generate code using this dataframe." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"></path>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_9b7e87cb-2836-4754-a76f-cb98cb7424a3 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('movies_top_5_genre');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div>
+</div>
+<div id="cell-22" class="cell" data-outputid="1fe7b3bb-a769-4a8b-c55c-46039a84d654" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Addition of log(num_votes) variable</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>movies_top_5_genre[<span class="st">'log_num_votes'</span>] <span class="op">=</span> np.log(movies_top_5_genre[<span class="st">'num_votes'</span>])</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>movies_top_5_genre</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  movies_top_5_genre['log_num_votes'] = np.log(movies_top_5_genre['num_votes'])</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="28">
+
+  <div id="df-2ff2f1e7-4120-4187-9416-a0b07f9bd929" class="colab-df-container">
+    <div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">tconst</th>
+<th data-quarto-table-cell-role="th">title_type</th>
+<th data-quarto-table-cell-role="th">primary_title</th>
+<th data-quarto-table-cell-role="th">simple_title</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">runtime_minutes</th>
+<th data-quarto-table-cell-role="th">average_rating</th>
+<th data-quarto-table-cell-role="th">num_votes</th>
+<th data-quarto-table-cell-role="th">genres</th>
+<th data-quarto-table-cell-role="th">log_num_votes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>tt0020356</td>
+<td>movie</td>
+<td>Sailor's Holiday</td>
+<td>sailors holiday</td>
+<td>1929</td>
+<td>58.0</td>
+<td>5.4</td>
+<td>55</td>
+<td>Comedy</td>
+<td>4.007333</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>tt0020823</td>
+<td>movie</td>
+<td>The Devil's Holiday</td>
+<td>the devils holiday</td>
+<td>1930</td>
+<td>80.0</td>
+<td>6.0</td>
+<td>242</td>
+<td>Drama</td>
+<td>5.488938</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>tt0020985</td>
+<td>movie</td>
+<td>Holiday</td>
+<td>holiday</td>
+<td>1930</td>
+<td>91.0</td>
+<td>6.3</td>
+<td>638</td>
+<td>Comedy</td>
+<td>6.458338</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>tt0021268</td>
+<td>movie</td>
+<td>Holiday of St. Jorgen</td>
+<td>holiday of st jorgen</td>
+<td>1930</td>
+<td>83.0</td>
+<td>7.4</td>
+<td>256</td>
+<td>Comedy</td>
+<td>5.545177</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>tt0021377</td>
+<td>movie</td>
+<td>Sin Takes a Holiday</td>
+<td>sin takes a holiday</td>
+<td>1930</td>
+<td>81.0</td>
+<td>6.1</td>
+<td>740</td>
+<td>Comedy</td>
+<td>6.606650</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4520</td>
+<td>tt9747440</td>
+<td>tvMovie</td>
+<td>A Christmas Love Story</td>
+<td>a christmas love story</td>
+<td>2019</td>
+<td>84.0</td>
+<td>6.9</td>
+<td>1652</td>
+<td>Drama</td>
+<td>7.409742</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4523</td>
+<td>tt9747450</td>
+<td>tvMovie</td>
+<td>Holiday for Heroes</td>
+<td>holiday for heroes</td>
+<td>2019</td>
+<td>81.0</td>
+<td>7.0</td>
+<td>1655</td>
+<td>Romance</td>
+<td>7.411556</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4524</td>
+<td>tt9802890</td>
+<td>tvMovie</td>
+<td>Christmas Jars</td>
+<td>christmas jars</td>
+<td>2019</td>
+<td>93.0</td>
+<td>7.3</td>
+<td>914</td>
+<td>Drama</td>
+<td>6.817831</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">4525</td>
+<td>tt9815084</td>
+<td>tvMovie</td>
+<td>A Very British Christmas</td>
+<td>a very british christmas</td>
+<td>2019</td>
+<td>90.0</td>
+<td>5.7</td>
+<td>725</td>
+<td>Comedy</td>
+<td>6.586172</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4528</td>
+<td>tt9892854</td>
+<td>tvMovie</td>
+<td>#Xmas</td>
+<td>xmas</td>
+<td>2022</td>
+<td>84.0</td>
+<td>5.8</td>
+<td>926</td>
+<td>Comedy</td>
+<td>6.830874</td>
+</tr>
+</tbody>
+</table>
+
+<p>1692 rows × 10 columns</p>
+</div>
+    <div class="colab-df-buttons">
+
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-2ff2f1e7-4120-4187-9416-a0b07f9bd929')" title="Convert this dataframe to an interactive table." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"></path>
+  </svg>
+    </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+    <script>
+      const buttonEl =
+        document.querySelector('#df-2ff2f1e7-4120-4187-9416-a0b07f9bd929 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-2ff2f1e7-4120-4187-9416-a0b07f9bd929');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
+
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+    <div id="df-2742f64c-aa78-4737-9954-3937aac153b0">
+      <button class="colab-df-quickchart" onclick="quickchart('df-2742f64c-aa78-4737-9954-3937aac153b0')" title="Suggest charts" style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"></path>
+    </g>
+</svg>
+      </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+      <script>
+        async function quickchart(key) {
+          const quickchartButtonEl =
+            document.querySelector('#' + key + ' button');
+          quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+          quickchartButtonEl.classList.add('colab-df-spinner');
+          try {
+            const charts = await google.colab.kernel.invokeFunction(
+                'suggestCharts', [key], {});
+          } catch (error) {
+            console.error('Error during call to suggestCharts:', error);
+          }
+          quickchartButtonEl.classList.remove('colab-df-spinner');
+          quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+        }
+        (() => {
+          let quickchartButtonEl =
+            document.querySelector('#df-2742f64c-aa78-4737-9954-3937aac153b0 button');
+          quickchartButtonEl.style.display =
+            google.colab.kernel.accessAllowed ? 'block' : 'none';
+        })();
+      </script>
+    </div>
+
+  <div id="id_19c296fc-06b2-4180-b4c4-6a162a14f777">
+    <style>
+      .colab-df-generate {
+        background-color: #E8F0FE;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: none;
+        fill: #1967D2;
+        height: 32px;
+        padding: 0 0 0 0;
+        width: 32px;
+      }
+
+      .colab-df-generate:hover {
+        background-color: #E2EBFA;
+        box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+        fill: #174EA6;
+      }
+
+      [theme=dark] .colab-df-generate {
+        background-color: #3B4455;
+        fill: #D2E3FC;
+      }
+
+      [theme=dark] .colab-df-generate:hover {
+        background-color: #434B5C;
+        box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+        filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+        fill: #FFFFFF;
+      }
+    </style>
+    <button class="colab-df-generate" onclick="generateWithVariable('movies_top_5_genre')" title="Generate code using this dataframe." style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewbox="0 0 24 24" width="24px">
+    <path d="M7,19H8.4L18.45,9,17,7.55,7,17.6ZM5,21V16.75L18.45,3.32a2,2,0,0,1,2.83,0l1.4,1.43a1.91,1.91,0,0,1,.58,1.4,1.91,1.91,0,0,1-.58,1.4L9.25,21ZM18.45,9,17,7.55Zm-12,3A5.31,5.31,0,0,0,4.9,8.1,5.31,5.31,0,0,0,1,6.5,5.31,5.31,0,0,0,4.9,4.9,5.31,5.31,0,0,0,6.5,1,5.31,5.31,0,0,0,8.1,4.9,5.31,5.31,0,0,0,12,6.5,5.46,5.46,0,0,0,6.5,12Z"></path>
+  </svg>
+    </button>
+    <script>
+      (() => {
+      const buttonEl =
+        document.querySelector('#id_19c296fc-06b2-4180-b4c4-6a162a14f777 button.colab-df-generate');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+      buttonEl.onclick = () => {
+        google.colab.notebook.generateWithVariable('movies_top_5_genre');
+      }
+      })();
+    </script>
+  </div>
+
+    </div>
+  </div>
+</div>
+</div>
+<div id="cell-23" class="cell" data-outputid="553bfcb7-cbe4-40f3-c3d6-4631b460d938" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Use of seaborn to plot the relationship between log_num_votes and average rating</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sns.lmplot(data <span class="op">=</span> movies_top_5_genre,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>           x <span class="op">=</span> <span class="st">'average_rating'</span>, y <span class="op">=</span> <span class="st">'log_num_votes'</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>           hue <span class="op">=</span> <span class="st">'genres'</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>           scatter_kws <span class="op">=</span> {<span class="st">'alpha'</span> : <span class="fl">0.5</span>},</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>           col <span class="op">=</span> <span class="st">'title_type'</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>           row <span class="op">=</span> <span class="st">'genres'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Pandas_Basics_Blog_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>There is certainly a lot of information to unpack from these graphs, but I will try my best to summarize it two or three sentences:</p>
+<p>In a few instances, there seems to be more negative ratings corresponding to higher number of votes, which could point to a classic explanation in rating systems, where customers that are dissatisfied are more likely to complain, and therefore leave a bad review. The only clear graph with a positive relationship between the average rating and the number of ratings happens to be the tvMovie Holiday Dramas. Otherwise, there is often a negative (or no) correlation between the average rating of a movie/film/video and the logarithmic value of the number of votes.</p>
 <section id="as-always-thank-you-for-reading" class="level3">
 <h3 class="anchored" data-anchor-id="as-always-thank-you-for-reading">As always, thank you for reading!</h3>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

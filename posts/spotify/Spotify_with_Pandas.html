@@ -201,7 +201,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#as-always-thanks-for-reading" id="toc-as-always-thanks-for-reading" class="nav-link active" data-scroll-target="#as-always-thanks-for-reading">As always, thanks for reading!</a></li>
+  <li><a href="#second-approach-to-the-data-with-visualization-using-seaborn" id="toc-second-approach-to-the-data-with-visualization-using-seaborn" class="nav-link active" data-scroll-target="#second-approach-to-the-data-with-visualization-using-seaborn">Second approach to the data: With Visualization using Seaborn</a>
+  <ul class="collapse">
+  <li><a href="#as-always-thanks-for-reading" id="toc-as-always-thanks-for-reading" class="nav-link" data-scroll-target="#as-always-thanks-for-reading">As always, thanks for reading!</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -212,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="cell-1" class="cell">
+<div id="cell-1" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Let's load up some data from Spotify so that we can take a look at it!</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -979,7 +982,7 @@ memory usage: 10.6+ MB</code></pre>
   </div>
 </div>
 </div>
-<div id="cell-5" class="cell" data-outputid="70362283-e325-4749-9e36-5c929343b192" data-execution_count="26">
+<div id="cell-5" class="cell" data-outputid="70362283-e325-4749-9e36-5c929343b192">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filtering -&gt; use of a the query() method</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>coldplay <span class="op">=</span> spotify.query(<span class="st">"artist_name == 'Coldplay'"</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>coldplay</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1378,57 +1381,57 @@ memory usage: 10.6+ MB</code></pre>
 </div>
 <p>Now, I’m curious to see how many times Coldplay appears in this particular dataset that contains 1 million different playlists.</p>
 <p>I am also particularly interested in the number of unique track_names that appear within this DataFrame.</p>
-<div id="cell-7" class="cell" data-outputid="cc4af2e6-7619-4306-a473-ae875f1a51e9" data-execution_count="31">
+<div id="cell-7" class="cell" data-outputid="cc4af2e6-7619-4306-a473-ae875f1a51e9">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>coldplay.shape[<span class="dv">0</span>] <span class="co">#there are 483 observations of Coldplay in this data!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>483</code></pre>
 </div>
 </div>
-<div id="cell-8" class="cell" data-outputid="4a1e3fca-8a05-45ea-f4e2-2faae2e0045f" data-execution_count="41">
+<div id="cell-8" class="cell" data-outputid="4a1e3fca-8a05-45ea-f4e2-2faae2e0045f">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>spotify.shape[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="41">
 <pre><code>198005</code></pre>
 </div>
 </div>
-<div id="cell-9" class="cell" data-outputid="e05165ba-39f4-49cc-a857-509500a9f5eb" data-execution_count="42">
+<div id="cell-9" class="cell" data-outputid="e05165ba-39f4-49cc-a857-509500a9f5eb">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dv">483</span><span class="op">/</span><span class="dv">198005</span> <span class="co">#Coldplay shows up in less than 1% of playlists, I suppose there is a very specific mood of a playlist that calls for Coldplay.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="42">
 <pre><code>0.002439332340092422</code></pre>
 </div>
 </div>
-<div id="cell-10" class="cell" data-outputid="cfe35f09-f98f-428e-babb-0c6acc24b9dd" data-execution_count="33">
+<div id="cell-10" class="cell" data-outputid="cfe35f09-f98f-428e-babb-0c6acc24b9dd">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>coldplay[<span class="st">'track_name'</span>].nunique() <span class="co">#74 unique tracks</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
 <pre><code>74</code></pre>
 </div>
 </div>
 <p>I also thought it would be interesting to see the mean position in which coldplay songs are added to these playlists (especially in comparison to the average position for all observations in the dataframe).</p>
-<div id="cell-12" class="cell" data-outputid="d45a4294-5c8d-4f07-e3f5-fa17c911cd88" data-execution_count="35">
+<div id="cell-12" class="cell" data-outputid="d45a4294-5c8d-4f07-e3f5-fa17c911cd88">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>coldplay[<span class="st">'pos'</span>].mean() <span class="co">#Around the 45th position!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="35">
 <pre><code>44.79710144927536</code></pre>
 </div>
 </div>
-<div id="cell-13" class="cell" data-outputid="a0d66321-8c2d-488f-e75a-fa9602435e5f" data-execution_count="36">
+<div id="cell-13" class="cell" data-outputid="a0d66321-8c2d-488f-e75a-fa9602435e5f">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>spotify[<span class="st">'pos'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
 <pre><code>54.39170728011919</code></pre>
 </div>
 </div>
 <p>Finally, let’s look at the length of these songs.</p>
-<div id="cell-15" class="cell" data-outputid="662e5bcc-fbce-4c9e-cc8e-9c846b7bc56f" data-execution_count="37">
+<div id="cell-15" class="cell" data-outputid="662e5bcc-fbce-4c9e-cc8e-9c846b7bc56f">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>spotify[<span class="st">'duration_ms'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
 <pre><code>234740.84469079063</code></pre>
 </div>
 </div>
-<div id="cell-16" class="cell" data-outputid="6b99064d-ae7f-4085-96e9-ea5caf1b208c" data-execution_count="38">
+<div id="cell-16" class="cell" data-outputid="6b99064d-ae7f-4085-96e9-ea5caf1b208c">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>coldplay[<span class="st">'duration_ms'</span>].mean() <span class="co">#coldplay songs seem to be longer! lets see if there are any in particular through sorting.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
 <pre><code>268694.7039337474</code></pre>
 </div>
 </div>
-<div id="cell-17" class="cell" data-outputid="4650586a-c6db-4b3f-b712-56c56de54681" data-execution_count="40">
+<div id="cell-17" class="cell" data-outputid="4650586a-c6db-4b3f-b712-56c56de54681">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>coldplay.sort_values([<span class="st">'duration_ms'</span>], ascending <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co">#With this information in the dataframe, they range from 465957ms to 136866ms</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="40">
@@ -1778,10 +1781,61 @@ memory usage: 10.6+ MB</code></pre>
 <li>There was quite a range in the length of the tracks, from 136 seconds to 465 seconds.</li>
 <li>When comparing the average position, Coldplay comes slightly sooner in playlists than the average for all songs.</li>
 </ol>
+<section id="second-approach-to-the-data-with-visualization-using-seaborn" class="level1">
+<h1>Second approach to the data: With Visualization using Seaborn</h1>
+<div id="cell-20" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-21" class="cell" data-outputid="c8a5a565-522d-4279-fcce-32dcc71c2dc5" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Use pandas to identify the ten artists with the most tracks</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>sum_tracks_by_artist <span class="op">=</span> spotify.groupby(<span class="st">'artist_name'</span>).agg(sum_appearances <span class="op">=</span> (<span class="st">'track_name'</span>, <span class="st">'count'</span>)).reset_index()</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>top_10 <span class="op">=</span> sum_tracks_by_artist.nlargest(<span class="dv">10</span>, <span class="st">'sum_appearances'</span>, keep <span class="op">=</span> <span class="st">'all'</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>top_10_artists <span class="op">=</span> top_10[<span class="st">'artist_name'</span>].tolist()</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>top_10_artists</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Now we just need to filter out the dataframe so it includes JUST those that are in this list of artists (top 10).</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre><code>['Drake',
+ 'Kanye West',
+ 'Kendrick Lamar',
+ 'Rihanna',
+ 'The Weeknd',
+ 'Future',
+ 'Eminem',
+ 'Lil Uzi Vert',
+ 'Ed Sheeran',
+ 'The Chainsmokers']</code></pre>
+</div>
+</div>
+<p>Now, given the list of the top artists on Spotify, we can examine where they’re placed in playlists (pos variable). We can visualize this using histogram plots, one that is distinct for every artist. All of these have the same count variable on the left, which is simply the number of occurences at a certain point in the playlist.</p>
+<p>The only thing is; I was unable to order them in the order in which they appeared to have the most tracks, it resorted back to their appearances in the dataframe when creating the histograms.</p>
+<div id="cell-23" class="cell" data-outputid="1e8f7856-55d7-4951-d6c8-e374a05741d9" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>spotify_top_10 <span class="op">=</span> spotify[spotify[<span class="st">'artist_name'</span>].isin(top_10_artists)]</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>spotify_top_10</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a> sns.FacetGrid(</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>       data <span class="op">=</span> spotify_top_10,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>       col <span class="op">=</span> <span class="st">'artist_name'</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>       hue <span class="op">=</span> <span class="st">'artist_name'</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a> .<span class="bu">map</span>(sns.histplot, <span class="st">'pos'</span>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Spotify_with_Pandas_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Keeping in mind the ACTUAL order of the artists: ‘Drake’, ‘Kanye West’, ‘Kendrick Lamar’, ‘Rihanna’, ‘The Weeknd’, ‘Future’, ‘Eminem’, ‘Lil Uzi Vert’, ‘Ed Sheeran’, ‘The Chainsmokers’</em></p>
+<p>Based on these histograms for each artist, there is always a right-skew to the distribution of positions in the playlist they’re in. There appears to be a strong correlation between the start of a playlist and the inclusion of the music of these top 10 artists. This makes sense, since they are popular artists, with the top 10 most tracks appearing in playlists, and are more likely to be recognized and thought of toward the beginning of the creation of a playlist, or added early by an algorithm.</p>
 <section id="as-always-thanks-for-reading" class="level3">
 <h3 class="anchored" data-anchor-id="as-always-thanks-for-reading">As always, thanks for reading!</h3>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
