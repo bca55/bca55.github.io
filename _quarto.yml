@@ -11,7 +11,7 @@ website:
       - text: Blog
         href: blog-listing.qmd
       - text: Project
-        href: danl_proj_nba.ipynb
+        href: danl_210_armpriest_bryan_stock_ESG.ipynb
       - text: Python Data Analysis
         menu:   
           - text: Pandas
